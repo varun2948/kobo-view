@@ -1,7 +1,10 @@
 import shop from '@/api/shop'
 
+console.log('varun Done')
 const state = {
   added: [],
+  offices: [],
+  newOffice: '',
   lastCheckout: null
 }
 
@@ -10,6 +13,7 @@ const actions = {
   // dispatch function, which applies a mutation to the store,
   // and the current state of the store
   checkout ({commit, state}, products) {
+    console.log('Goal')
     const savedCartItems = [...state.added]
     commit('checkout_request')
     shop.buyProducts(
@@ -40,6 +44,7 @@ const mutations = {
   },
   checkout_successful (state) {
     state.lastCheckout = 'successful'
+    console.log('checkout successful')
   },
   checkout_failure (state, savedCartItems) {
     // rollback to the cart saved before sending the request
@@ -50,6 +55,7 @@ const mutations = {
 
 const getters = {
   cartProducts (state, getters, rootState) {
+    console.log('Getters')
     return state.added.map(({ id, quantity }) => {
       const product = rootState.products.all.find(p => p.id === id)
       return {
@@ -66,7 +72,9 @@ const getters = {
       totalCount += quantity
     })
     return totalCount
-  }
+  },
+  newOffice: state => state.newOffice,
+  offices: state => state.offices
 }
 
 export default {

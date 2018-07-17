@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+console.log('GOALLLL')
 export default {
   getOffices (cb) {
     console.log('Home::created') // useful for understanding the lifecycle

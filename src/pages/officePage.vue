@@ -3,6 +3,7 @@
     <router-link to="/" class="back-link">BACK</router-link>
     <div class="office-title"><b>Office Name:</b>{{ office.name }}</div>
     <div class="office-detail"><b>Type:</b> {{office.type}}</div>
+    <div class="office-detail"><b>District:</b> {{office.district}}</div>
     <div class="office-detail"><b>ID:</b> {{office.id}}</div>
     <div class="office-details">
       <div class="inventory"><b>{{ office.name }}</b></div>
@@ -35,8 +36,8 @@
 </script>
 
 <style>
-  body{
-  overflow: hidden;
+body{
+  overflow-x: hidden;
 }
 .office-item {
   margin: 10px 10px;

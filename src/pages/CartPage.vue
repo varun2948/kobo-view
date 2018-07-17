@@ -1,39 +1,58 @@
 <template>
-  <div class="cart">
-    <p v-show="!products.length"><i>Please add some products to cart.</i></p>
-    <div v-show="products.length > 0">
-    <table class="checkout-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Quantity</th>
-          <th>Per Unit</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr v-for="p in products">
-        <td><router-link :to="{name: 'product', params: {id: p.id}}">{{ p.title }}</router-link></td>
-        <td>$ {{ p.price }}</td>
-        <td>{{ p.quantity }}</td>
-        <td>$ {{ p.price * p.quantity }}</td>
-      </tr>
-      <tr class='total'>
-        <td><b>TOTAL</b></td>
-        <td></td>
-        <td></td>
-        <td>$ {{ total }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <p><button :disabled="!products.length" @click="checkout(products)" class='checkout-button'>Checkout</button></p>
+
+  <div class="hero is-fullheight is-info is-bold">
+  <div class="hero-body">
+  <div class="container">
+    <h1 class="title has-text-centered">Vue.js Form Processing</h1>
+    <div class="box">
+
+      <!-- our signup form ===================== -->
+      <form id="signup-form" @submit.prevent="addNewOffice()">
+        <div class="field">
+          <label for="district">District</label>
+          <select v-model="district">
+  <option disabled value="">Please select District</option>
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+  <option>6</option>
+  <option>7</option>
+</select>Selected: {{district}}
+        </div>
+
+        <!-- email -->
+        <div class="field">
+          <label for="type">Type</label>
+          <input 
+            type="number" 
+            class="text" 
+            name="type" 
+            v-model="type"
+            >
+        </div>
+        <div class="field">
+        <label for="Name">Office Name</label>
+        <input type="text" v-model="name" name="officename">
+        </div>
+
+        <!-- submit button -->
+        <div class="field has-text-right">
+          <button type="submit" class="button is-danger">
+            Submit            
+          </button>
+        </div>
+      </form>
     </div>
-    <p v-show="checkoutStatus">Checkout {{ checkoutStatus }}.</p>
+  </div>
+  </div>
   </div>
 </template>
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import axios from 'axios'
   export default {
     computed: {
       ...mapGetters({
@@ -46,14 +65,50 @@
         return this.products.reduce((total, p) => {
           return total + p.price * p.quantity
         }, 0)
+      },
+      office () {
+        let id = parseInt(this.$route.params.id)
+        return this.allOffices.find((p) => p.id === id) || {}
       }
     },
     methods: {
       ...mapActions([
-        'checkout'
-      ])
+        'checkout',
+        'addOffice',
+        'postAllOffices'
+      ]),
+      processForm: function () {
+        console.log({ name: this.name, email: this.email })
+        alert('Done')
+      },
+      addNewOffice (office) {
+        axios.post('http://core.naxa.com.np/office/api/office/', {
+          'name': this.name,
+          'district': this.district,
+          'type': this.type
+        })
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      }
+    },
+    data () {
+      return {
+        name: '',
+        type: '',
+        district: '',
+        product: null,
+        selected: '',
+        errors: {
+          name: false,
+          email: false
+        }
+      }
     }
-  }
+}
 </script>
 
 <style>
