@@ -1,5 +1,5 @@
 <template>
-<div class="app">
+<div class="app" v-bind:style="{ backgroundColor: color }">
   <div class="header">
   <header-bar></header-bar>
   </div>
@@ -19,7 +19,15 @@ export default {
   components: {
     HeaderBar
   },
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      color: '#ADD8E6',
+      items: [
+        'All', 'Family', 'Friends', 'Coworkers'
+      ]
+    }
+  }
 }
 </script>
 

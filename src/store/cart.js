@@ -5,6 +5,9 @@ const state = {
   added: [],
   offices: [],
   newOffice: '',
+  items: [
+    'All', 'Family', 'Friends', 'Coworkers'
+  ],
   lastCheckout: null
 }
 

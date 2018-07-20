@@ -1,5 +1,5 @@
 <template>
-<v-app>
+<div class="app">
   <v-container fluid>
     <v-layout row wrap>
       <v-flex xs12 class="text-xs-center" mt-5>
@@ -7,7 +7,7 @@
       </v-flex>
     </v-layout>
   </v-container>
-</v-app>
+</div>
 </template>
 
 <script>

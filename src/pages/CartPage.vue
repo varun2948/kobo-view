@@ -7,43 +7,47 @@
     <div class="box">
 
       <!-- our signup form ===================== -->
-      <form id="signup-form" @submit.prevent="addNewOffice()">
-        <div class="field">
+      <form id="signup-form" @submit.prevent="addNewOffice()">   
+        <div class="field"> 
           <label for="district">District</label>
-          <select v-model="district">
+          <select v-model="dist">
   <option disabled value="">Please select District</option>
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-  <option>6</option>
-  <option>7</option>
-</select>Selected: {{district}}
+  <option v-for="(district) in districts"> {{district.name}} ({{district.id}})</option>
+</select>Selected: {{dist}}
+</option> 
         </div>
-
         <!-- email -->
         <div class="field">
-          <label for="type">Type</label>
-          <input 
-            type="number" 
-            class="text" 
-            name="type" 
-            v-model="type"
-            >
+         <v-chip label outline color="red">Type</v-chip>
+      <select v-model="typ">
+  <option disabled value="">Please select Type</option>
+  <option v-for="type in types">{{type.type}}</option>
+</select>Selected: {{typ}}
+ <v-flex xs12 sm6 d-flex>
+        <v-select
+          :items="types"
+          label="Outline style"
+          outline
+        ></v-select>
+      </v-flex>
         </div>
         <div class="field">
-        <label for="Name">Office Name</label>
+        <v-chip label outline color="red">Office Name</v-chip>
         <input type="text" v-model="name" name="officename">
+        <v-flex xs2 sm4>
+          <v-text-field
+            label="Office Name"
+            single-line
+            Office Name
+          ></v-text-field>
+        </v-flex>
         </div>
 
         <!-- submit button -->
-        <div class="field has-text-right">
-          <button type="submit" class="button is-danger">
-            Submit            
-          </button>
-        </div>
       </form>
+      
+          <v-btn color="success" class="submitbtn" type="submit">Success</v-btn>
+        
     </div>
   </div>
   </div>
@@ -84,8 +88,8 @@
       addNewOffice (office) {
         axios.post('http://core.naxa.com.np/office/api/office/', {
           'name': this.name,
-          'district': this.district,
-          'type': this.type
+          'district': this.dist,
+          'type': this.typ
         })
         .then(function (response) {
           console.log(response)
@@ -93,13 +97,40 @@
         .catch(function (error) {
           console.log(error)
         })
+      },
+      getDistricts (cb) {
+        console.log('GetDistrict Function') // useful for understanding the lifecycle
+        axios.get('http://core.naxa.com.np/office/api/districts/')
+        .then(response => {
+          this.districts = response.data
+          console.log(this.districts)
+        })
+      },
+      getTypes (cb) {
+        console.log('GetType Function') // useful for understanding the lifecycle
+        axios.get('http://core.naxa.com.np/office/api/type/')
+        .then(response => {
+          this.types = response.data
+          console.log(this.types)
+        })
       }
+    },
+    created () {
+      this.getDistricts()
+      this.getTypes()
     },
     data () {
       return {
         name: '',
         type: '',
+        types: [],
         district: '',
+        items: [
+          'All', 'Family', 'Friends', 'Coworkers'
+        ],
+        districts: [],
+        dist: '',
+        typ: '',
         product: null,
         selected: '',
         errors: {
@@ -112,9 +143,14 @@
 </script>
 
 <style>
-
+[v-cloak] {
+    display: none;
+  }
 .cart {
   width: 600px;
+}
+.submitbtn{
+background-color: red;
 }
 .checkout-table {
   width: 100%;
