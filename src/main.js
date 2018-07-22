@@ -8,7 +8,7 @@ import store from './store/index'
 import { sync } from 'vuex-router-sync'
 import BootstrapVue from 'bootstrap-vue'
 import 'vuetify/dist/vuetify.min.css'
-import 'vuetify/dist/icon.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 sync(store, router)
 Vue.use(BootstrapVue)

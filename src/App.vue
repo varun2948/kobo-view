@@ -22,7 +22,7 @@ export default {
   name: 'app',
   data () {
     return {
-      color: '#ADD8E6',
+      color: '#81C784',
       items: [
         'All', 'Family', 'Friends', 'Coworkers'
       ]

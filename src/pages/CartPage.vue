@@ -1,57 +1,62 @@
 <template>
-
-  <div class="hero is-fullheight is-info is-bold">
-  <div class="hero-body">
-  <div class="container">
-    <h1 class="title has-text-centered">Vue.js Form Processing</h1>
-    <div class="box">
-
-      <!-- our signup form ===================== -->
-      <form id="signup-form" @submit.prevent="addNewOffice()">   
-        <div class="field"> 
-          <label for="district">District</label>
-          <select v-model="dist">
-  <option disabled value="">Please select District</option>
-  <option v-for="(district) in districts"> {{district.name}} ({{district.id}})</option>
-</select>Selected: {{dist}}
-</option> 
-        </div>
-        <!-- email -->
-        <div class="field">
+  <v-app id="form">
+    <div class="container center-block">
+      <h1 class="title has-text-centered">Vue.js Form Processing</h1>
+      <div class="box">
+        <!-- our signup form ===================== -->
+        <form id="signup-form" @submit.prevent="addNewOffice()">   
+          <div class="field"> 
+            <v-chip label outline color="red">District</v-chip>
+            <v-flex xs2 sm3 d-flex>
+             <v-select :items="districts" 
+             v-model="dist" 
+             label="Select"
+             item-text= "name"
+             item-value= "id"
+             >
+           </v-select>
+         </v-flex>District Id: {{dist}} 
+       </div>
+       <!-- email -->
+       <div class="field">
          <v-chip label outline color="red">Type</v-chip>
-      <select v-model="typ">
-  <option disabled value="">Please select Type</option>
-  <option v-for="type in types">{{type.type}}</option>
-</select>Selected: {{typ}}
- <v-flex xs12 sm6 d-flex>
-        <v-select
-          :items="types"
-          label="Outline style"
-          outline
-        ></v-select>
+         <div class="type option">
+           <v-flex xs2 sm3 d-flex>
+           <transition name="fade-transition">
+             <v-select :items="types" 
+             v-model="typ" 
+             label="Type"
+             item-text= "type"
+             item-value= "id"
+             >
+           </v-select>
+           </transition>
+         </v-flex>
+       </div>
+       Type Id: {{typ}}
+     </div>
+     <div class="field">
+      <v-chip label outline color="red">Office Name</v-chip>
+      <input type="text" v-model="name" name="officename">
+      <v-flex xs2 sm4>
+        <v-text-field
+        label="Office Name"
+        single-line
+        Office Name
+        v-model="name"
+        name="officename"
+        ></v-text-field>
       </v-flex>
-        </div>
-        <div class="field">
-        <v-chip label outline color="red">Office Name</v-chip>
-        <input type="text" v-model="name" name="officename">
-        <v-flex xs2 sm4>
-          <v-text-field
-            label="Office Name"
-            single-line
-            Office Name
-          ></v-text-field>
-        </v-flex>
-        </div>
-
-        <!-- submit button -->
-      </form>
-      
-          <v-btn color="success" class="submitbtn" type="submit">Success</v-btn>
-        
     </div>
-  </div>
-  </div>
-  </div>
+
+    <!-- submit button -->
+    <v-btn color="success" class="submitbtn" type="submit">Success</v-btn>
+  </form>
+</div>
+</div>
+</div>
+</div>
+</v-app>
 </template>
 
 <script>
@@ -128,6 +133,7 @@
         items: [
           'All', 'Family', 'Friends', 'Coworkers'
         ],
+        selectedItems: [],
         districts: [],
         dist: '',
         typ: '',
@@ -139,42 +145,52 @@
         }
       }
     }
-}
+  }
 </script>
 
 <style>
-[v-cloak] {
+  [v-cloak] {
     display: none;
   }
-.cart {
-  width: 600px;
-}
-.submitbtn{
-background-color: red;
-}
-.checkout-table {
-  width: 100%;
-}
+  .fade-transition
+  &-leave-active
+    position: absolute
+ 
+  &-enter-active, &-leave, &-leave-to
+    transition: $primary-transition
+ 
+  &-enter, &-leave-to
+    opacity: 0
 
-.checkout-table th {
-  text-align: left;
-  padding: 15px 0px;
-  border-bottom: 1px solid #aaa;
-}
+  .cart {
+    width: 600px;
+  }
+  .submitbtn{
+    background-color: red;
+  }
+  .checkout-table {
+    width: 100%;
+  }
 
-.checkout-table td {
-  padding: 8px 0px;
-}
+  .checkout-table th {
+    text-align: left;
+    padding: 15px 0px;
+    border-bottom: 1px solid #aaa;
+  }
 
-.checkout-button {
-  float: right;
-  width: 120px;
-  height: 40px;
-  margin-top: 20px;
-}
+  .checkout-table td {
+    padding: 8px 0px;
+  }
 
-.total td {
-  border-top: 1px solid #aaa;
-  padding-top: 10px;
-}
+  .checkout-button {
+    float: right;
+    width: 120px;
+    height: 40px;
+    margin-top: 20px;
+  }
+
+  .total td {
+    border-top: 1px solid #aaa;
+    padding-top: 10px;
+  }
 </style>

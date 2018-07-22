@@ -1,4 +1,5 @@
 <template>
+
   <div class="office-item">
     <router-link to="/" class="back-link">BACK</router-link>
     <div class="office-title"><b>Office Name:</b>{{ office.name }}</div>

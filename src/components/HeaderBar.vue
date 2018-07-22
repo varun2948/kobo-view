@@ -1,8 +1,7 @@
 <template v-bind:style="{ backgroundColor: color }">
 <div id="app" >
   <v-toolbar
-      color="red"
-      dark
+      color='green accent-1'
       tabs
     >
     <v-toolbar-side-icon>
