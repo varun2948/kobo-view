@@ -1,24 +1,38 @@
 <template v-bind:style="{ backgroundColor: color }">
-<div id="app" >
+<div id="app">
   <v-toolbar
       color='green accent-1'
-      tabs
-    >
+      tabs>
+    <v-breadcrumbs divider="/">
+      <v-breadcrumbs-item
+        v-for="office in offices"
+        :key="office.name"
+        :disabled="office.disabled"
+      >
+        sdsd
+      </v-breadcrumbs-item>
+    </v-breadcrumbs>
     <v-toolbar-side-icon>
         </v-toolbar-side-icon>
-      </span>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">
-        </router-link>
-      </v-toolbar-title>
+        <!-- <v-btn color="success">
+          <v-badge
+          color="Green"
+        >
+          <span slot="badge">6</span>
+          <v-icon large color="grey">mail</v-icon>
+          </v-badge>
+        </v-btn> -->
+    </v-toolbar-title>
     <v-toolbar-title>Kobo-Office</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat to="/">Home</v-btn>
-      <v-btn flat to="/cart">Cart</v-btn>
-      <v-btn flat to="/*">Not Found</v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
+      <v-btn flat to="/"><v-icon>face</v-icon>Home</v-btn>
+      <v-btn flat to="/officeform"><v-icon>favorite</v-icon>Office Form</v-btn>
+      <v-btn flat to="/*"><v-icon>lock_open</v-icon>Not Found</v-btn>
+      <v-btn flat to="/login"><v-icon>person</v-icon>Login</v-btn>
+      </v-toolbar-items>
+      </v-toolbar>
   </div>
 </template>
 

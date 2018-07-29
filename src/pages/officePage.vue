@@ -2,11 +2,29 @@
 
   <div class="office-item">
     <router-link to="/" class="back-link">BACK</router-link>
-    <div class="office-title"><b>Office Name:</b>{{ office.name }}</div>
+     <v-container>
+    <v-layout row wrap>
+            <v-card dark color="blue ">
+              <v-card-text color="black">
+    <b>Office Name:</b>{{ office.name }}
+    <br>
+    <b>Type:</b> {{office.type}}
+    <br>
+    <b>District:</b> {{office.district}}
+    <br>
+    <b>ID:</b> {{office.id}}
+    <br>
+    
+      <b>{{ office.name }}</b>
+              </v-card-text>
+            </v-card>
+    </v-layout>
+  </v-container>
+    <!-- <div class="office-title"><b>Office Name:</b>{{ office.name }}</div>
     <div class="office-detail"><b>Type:</b> {{office.type}}</div>
     <div class="office-detail"><b>District:</b> {{office.district}}</div>
     <div class="office-detail"><b>ID:</b> {{office.id}}</div>
-    <div class="office-details">
+    <div class="office-details"> -->
       <div class="inventory"><b>{{ office.name }}</b></div>
     </div>
   </div>

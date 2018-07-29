@@ -1,12 +1,17 @@
-template>
+<template>
   <v-app id="form">
     <div class="container center-block">
       <h1 class="title has-text-centered">Vue.js Form Processing</h1>
       <div class="box">
+      <v-btn color="orange darken-2" dark to="/" tag="span" style="cursor: pointer">
+        <v-icon dark left>arrow_back</v-icon>Back
+        <router-link to="/" tag="span" style="cursor: pointer">
+        </router-link>
+        </v-btn>
         <!-- our signup form ===================== -->
-        <form id="signup-form" @submit.prevent="addNewOffice()">   
+        <form id="signup-form" @submit.prevent="addNewOffice()">  
+        <v-chip label outline color="red">District</v-chip> 
           <div class="field"> 
-            <v-chip label outline color="red">District</v-chip>
             <v-flex xs2 sm3 d-flex>
              <v-select :items="districts" 
              v-model="dist" 
@@ -152,16 +157,6 @@ template>
   [v-cloak] {
     display: none;
   }
-  .fade-transition
-  &-leave-active
-    position: absolute
- 
-  &-enter-active, &-leave, &-leave-to
-    transition: $primary-transition
- 
-  &-enter, &-leave-to
-    opacity: 0
-
   .cart {
     width: 600px;
   }

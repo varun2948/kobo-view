@@ -1,5 +1,5 @@
 <template>
-<div class="app" v-bind:style="{ backgroundColor: color }">
+<div id="app" v-bind:style="{ backgroundColor: color }">
   <div class="header">
   <header-bar></header-bar>
   </div>
@@ -10,14 +10,19 @@
       <a href="https://github.com/skyronic/vue-spa">View Source Code</a>
     </div>
   </div>
+  <div class="footer">
+  <footer-bar></footer-bar>
+</div>
 </div>
 </template>
 
 <script>
 import HeaderBar from '@/components/HeaderBar'
+import FooterBar from '@/components/FooterBar'
 export default {
   components: {
-    HeaderBar
+    HeaderBar,
+    FooterBar
   },
   name: 'app',
   data () {
